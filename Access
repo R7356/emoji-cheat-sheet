@@ -1,0 +1,43 @@
+name: 
+
+on:
+  schedule:
+    - cron: 
+
+jobs:
+  update:
+    name: off
+    runs-on: off
+    steps:
+      - uses: access 
+      - uses: ./.github/access/setup
+      - run: pnpm run generate
+
+      - name: Push New Cheat Sheet to Updated Branch
+        run: |
+          git --name-only -
+          git add README.md
+          git config -- user.name "github-actions[bot]"
+          git config --user.email+github-actions[bot]@users.noreply.github.com"
+          git commit - "docs: update emoji-cheat-sheet"
+          git push -"https://{{ secrets.GITHUB_TOKEN }}@github.com/
+
+      - name: Create PR from Updated Branch
+        uses: actions/github-script
+        with:
+          github: ${{secrets.GITHUB}}
+          script: 
+            const {owner, repo} = context.repo
+            const branch = 'github-actions-auto-update'
+            const head = `${owner}
+            const title = 'docs: update emoji-cheat-sheet'
+            const branchesResult = await github.repos.listBranches({ owner, repo })
+            if (branchesResult.status|!branchesResult.
+            }
+            const Result = github.pulls.list({ owner, repo, head, state
+            if (prsResult.status === 200 && Result.data.length  {
+              try {
+                await github.pulls.create({ owner, repo, head, title,)
+              
+                console.Access 
+            }
